@@ -1,150 +1,77 @@
-<form>
+<div class="sheet">
     <header>
         <img height="100" width="100" />
-        <input name="name" type="text" value="" placeholder="Name" />
+        {{formField fields.name value=name}}
     </header>
     <section>
         <div class="flex-container">
             {{formField fields.home value=home}}
-            <div class="fur">
-                <label for="fur">Fur</label>
-                <span><input name="fur" type="text" value="" id="fur" /></span>
-            </div>
-            <div class="age">
-                <label for="age">Age</label>
-                <span><input
-                        name="age"
-                        type="number"
-                        value=""
-                        min="0"
-                        id="age"
-                    />
-                </span>
-            </div>
+            {{formField fields.fur value=fur}}
+            {{formField fields.age value=age}}
         </div>
         <div class="flex-container">
-            <div>
-                <label for="rank">Rank</label>
-                <span>
-                    <input name="rank" type="text" value="" id="rank" />
-                </span>
-            </div>
-            <div>
-                <label for="cloak">Cloak</label>
-                <span><input
-                        name="cloak"
-                        type="text"
-                        value=""
-                        id="cloak"
-                    /></span>
-            </div>
+            {{formField fields.rank value=rank}}
+            {{formField fields.cloak value=cloak}}
         </div>
         <div class="flex-container">
-            <div>
-                <label for="menthor">Menthor</label>
-                <span><input
-                        name="menthor"
-                        type="text"
-                        value=""
-                        id="menthor"
-                    /></span>
-            </div>
-            <div>
-                <label for="master_artisan">Master Artisan</label>
-                <span><input
-                        name="master_artisan"
-                        type="text"
-                        value=""
-                        id="master_artisan"
-                    /></span>
-            </div>
+            {{formField fields.menthor value=menthor}}
+            {{formField fields.master_artisan value=master_artisan}}
         </div>
         <div class="flex-container">
-            <div>
-                <label for="parents">Parents</label>
-                <span><input
-                        name="parents"
-                        type="text"
-                        value=""
-                        id="parents"
-                    /></span>
-            </div>
-        </div>
-        <div class="flex-container">
-            <div>
-                <label for="friend">Friend</label>
-                <span><input
-                        name="friend"
-                        type="text"
-                        value=""
-                        id="friend"
-                    /></span>
-            </div>
-            <div>
-                <label for="enemy">Enemy</label>
-                <span>
-                    <input
-                        name="enemy"
-                        type="text"
-                        value=""
-                        id="enemy"
-                    /></span>
-            </div>
+            {{formField fields.parents value=parents}}
+            {{formField fields.friend value=friend}}
+            {{formField fields.enemy value=enemy}}
         </div>
     </section>
     <section>
         <div class="flex-container">
+            <!--
+            {{formField fields.instinct value=instinct}}
+            {{formField fields.belief value=belief}}
+            {{formField fields.goal value=goal}}
+            {{editor
+                fields.instinct
+                target=instinct
+                editable=true
+                button=false
+                engine="prosemirror"
+                collaborate=false
+            }}
+            {{editor
+                fields.belief
+                target=belief
+                editable=true
+                button=false
+                engine="prosemirror"
+                collaborate=false
+            }}
+            {{editor
+                fields.goal
+                target=goal
+                editable=true
+                button=false
+                engine="prosemirror"
+                collaborate=false
+            }}
+            -->
             <div>
-                <label for="instinct">Instinct</label><textarea
-                    name="instinct"
-                    type="text"
-                    id="instinct"
-                ></textarea>
+                <label>Instinct</label>
+                <textarea name="system.instinct">{{~instinct}}</textarea>
             </div>
-        </div>
-        <div class="flex-container">
             <div>
-                <label for="belief">Belief</label><textarea
-                    name="belief"
-                    type="text"
-                    id="belief"
-                ></textarea>
+                <label>Belief</label>
+                <textarea name="system.belief">{{~belief}}</textarea>
             </div>
-        </div>
-        <div class="flex-container">
             <div>
-                <label for="goal">Goal</label><textarea
-                    name="goal"
-                    type="text"
-                    id="goal"
-                ></textarea>
+                <label>Goal</label>
+                <textarea name="system.goal">{{~goal}}</textarea>
             </div>
         </div>
     </section>
     <section>
         <div class="flex-container abilities">
-            <div>
-                <label for="health">Health</label>
-                <span><input
-                        name="health"
-                        type="number"
-                        value=""
-                        min="0"
-                        max="5"
-                        id="health"
-                    /></span>
-            </div>
-            <div>
-                <label for="will">Will</label>
-                <span><input
-                        name="will"
-                        type="number"
-                        value=""
-                        min="0"
-                        max="5"
-                        id="will"
-                    /></span>
-            </div>
+            {{formField fields.health value=health}}
+            {{formField fields.will value=will}}
             <div class="nature">
                 <label for="nature_current">Nature</label>
                 <span><input
@@ -227,4 +154,4 @@
             </div>
         </div>
     </section>
-</form>
+</div>

@@ -1,0 +1,86 @@
+.sheet {
+    /*TBD*/
+    overflow: scroll;
+}
+
+/*
+This CSS requires that every line of label/input pairs are wrapped
+in a container with the .flex-container class.
+
+Then, every label/input should be wrapped together in a div element.
+The input should be placed inside a span element. 
+*/
+
+.flex-container {
+    flex-wrap: nowrap;
+    resize: none;
+    overflow: hidden;
+    display: flex;
+    margin: 0 0 0 0;
+}
+.flex-container .form-group {
+    flex: 1;
+    overflow: hidden;
+    margin: 0.5em;
+}
+
+.flex-container .fur {
+    flex: 1;
+    min-width: 150px;
+}
+.flex-container .home {
+    flex: 1;
+    min-width: 150px;
+}
+.flex-container .age {
+    flex: 0 0 6.25em;
+}
+
+.age input {
+    width: 4em;
+}
+
+.flex-container .form-group label {
+    text-align: left;
+    clear: both;
+    float: left;
+    margin-right: 15px;
+}
+
+.flex-container .form-group span {
+    display: block;
+    overflow: hidden; /* triggers layout, so doesnt show beneath float element */
+}
+.flex-container .form-group span input {
+    display: block;
+    float: left;
+    width: 100%; /* use all space avalaible */
+    box-sizing: border-box;
+}
+
+.flex-container .form-group textarea {
+    width: 100%;
+}
+
+.abilities .form-group label {
+    margin-right: 5px;
+}
+.abilities .form-group span {
+    width: 2.25em;
+}
+.abilities .form-group span.slash {
+    display: inline;
+    width: auto;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.flex-container .nature {
+    flex: 0 0 9em;
+}
+.flex-container .will {
+    flex: 0 0 9em;
+}
+.flex-container .nature span {
+    float: left;
+}

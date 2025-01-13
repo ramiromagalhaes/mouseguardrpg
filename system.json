@@ -1,0 +1,26 @@
+{
+    "id": "mouseguardrpg",
+    "title": "Mouse Guard RPG",
+    "description": "A fan-made system for playing the Mouse Guard RPG on Foundry VTT.",
+    "version": "0.0.1",
+    "compatibility": {
+        "minimum": 12,
+        "verified": 12
+    },
+    "authors": [
+        {
+            "name": "Ramiro Pereira de Magalhães",
+            "discord": "raiocaipora_29147"
+        }
+    ],
+    "esmodules": ["mouseguardrpg.mjs"],
+    "styles": ["styles/mouseguard.css"],
+    "documentTypes": {
+        "Actor": {
+            "character": {},
+            "mouse": {},
+            "animal": {},
+            "weasel": {}
+        }
+    }
+}
