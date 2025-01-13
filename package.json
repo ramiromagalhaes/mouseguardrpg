@@ -1,0 +1,18 @@
+{
+    "name": "mouseguard",
+    "version": "0.0.1",
+    "browserslist": [
+        "last 3 versions"
+    ],
+    "author": "",
+    "license": "MIT",
+    "private": true,
+    "devDependencies": {
+        "esbuild": "^0.24.0",
+        "eslint": "^9.16.0"
+    },
+    "scripts": {
+        "build": "esbuild ./module/*.mjs --bundle --sourcemap --outdir=./module",
+        "verify": "eslint"
+    }
+}
