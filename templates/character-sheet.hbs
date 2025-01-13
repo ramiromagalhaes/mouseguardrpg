@@ -1,0 +1,230 @@
+<form>
+    <header>
+        <img height="100" width="100" />
+        <input name="name" type="text" value="" placeholder="Name" />
+    </header>
+    <section>
+        <div class="flex-container">
+            {{formField fields.home value=home}}
+            <div class="fur">
+                <label for="fur">Fur</label>
+                <span><input name="fur" type="text" value="" id="fur" /></span>
+            </div>
+            <div class="age">
+                <label for="age">Age</label>
+                <span><input
+                        name="age"
+                        type="number"
+                        value=""
+                        min="0"
+                        id="age"
+                    />
+                </span>
+            </div>
+        </div>
+        <div class="flex-container">
+            <div>
+                <label for="rank">Rank</label>
+                <span>
+                    <input name="rank" type="text" value="" id="rank" />
+                </span>
+            </div>
+            <div>
+                <label for="cloak">Cloak</label>
+                <span><input
+                        name="cloak"
+                        type="text"
+                        value=""
+                        id="cloak"
+                    /></span>
+            </div>
+        </div>
+        <div class="flex-container">
+            <div>
+                <label for="menthor">Menthor</label>
+                <span><input
+                        name="menthor"
+                        type="text"
+                        value=""
+                        id="menthor"
+                    /></span>
+            </div>
+            <div>
+                <label for="master_artisan">Master Artisan</label>
+                <span><input
+                        name="master_artisan"
+                        type="text"
+                        value=""
+                        id="master_artisan"
+                    /></span>
+            </div>
+        </div>
+        <div class="flex-container">
+            <div>
+                <label for="parents">Parents</label>
+                <span><input
+                        name="parents"
+                        type="text"
+                        value=""
+                        id="parents"
+                    /></span>
+            </div>
+        </div>
+        <div class="flex-container">
+            <div>
+                <label for="friend">Friend</label>
+                <span><input
+                        name="friend"
+                        type="text"
+                        value=""
+                        id="friend"
+                    /></span>
+            </div>
+            <div>
+                <label for="enemy">Enemy</label>
+                <span>
+                    <input
+                        name="enemy"
+                        type="text"
+                        value=""
+                        id="enemy"
+                    /></span>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="flex-container">
+            <div>
+                <label for="instinct">Instinct</label><textarea
+                    name="instinct"
+                    type="text"
+                    id="instinct"
+                ></textarea>
+            </div>
+        </div>
+        <div class="flex-container">
+            <div>
+                <label for="belief">Belief</label><textarea
+                    name="belief"
+                    type="text"
+                    id="belief"
+                ></textarea>
+            </div>
+        </div>
+        <div class="flex-container">
+            <div>
+                <label for="goal">Goal</label><textarea
+                    name="goal"
+                    type="text"
+                    id="goal"
+                ></textarea>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="flex-container abilities">
+            <div>
+                <label for="health">Health</label>
+                <span><input
+                        name="health"
+                        type="number"
+                        value=""
+                        min="0"
+                        max="5"
+                        id="health"
+                    /></span>
+            </div>
+            <div>
+                <label for="will">Will</label>
+                <span><input
+                        name="will"
+                        type="number"
+                        value=""
+                        min="0"
+                        max="5"
+                        id="will"
+                    /></span>
+            </div>
+            <div class="nature">
+                <label for="nature_current">Nature</label>
+                <span><input
+                        name="nature_current"
+                        type="number"
+                        value=""
+                        min="0"
+                        max="7"
+                        id="nature_current"
+                    /></span>
+                <span class="slash"> / </span>
+                <span>
+                    <input
+                        name="nature_max"
+                        type="number"
+                        value=""
+                        min="0"
+                        max="7"
+                        id="nature_max"
+                    /></span>
+            </div>
+        </div>
+        <div class="flex-container abilities">
+            <div>
+                <label for="resources">Resources</label>
+                <span><input
+                        name="resources"
+                        type="number"
+                        value=""
+                        min="0"
+                        max="9"
+                        id="resources"
+                    /></span>
+            </div>
+            <div>
+                <label for="circles">Circles</label>
+                <span><input
+                        name="circles"
+                        type="number"
+                        value=""
+                        min="0"
+                        max="9"
+                        id="circles"
+                    /></span>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="flex-container">
+            <div>
+                <label for="fate">Fate</label>
+                <span><input
+                        name="fate"
+                        type="number"
+                        value=""
+                        min="0"
+                        id="fate"
+                    />
+                </span>
+            </div>
+            <div>
+                <label for="persona">Persona</label>
+                <span><input
+                        name="persona"
+                        type="number"
+                        value=""
+                        min="0"
+                        id="persona"
+                    /></span>
+            </div>
+            <div>
+                <label for="checks">Checks</label>
+                <span><input
+                        name="checks"
+                        type="number"
+                        value=""
+                        min="0"
+                        id="checks"
+                    /></span>
+            </div>
+        </div>
+    </section>
+</form>
