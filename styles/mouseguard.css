@@ -75,10 +75,10 @@ The input should be placed inside a span element.
     margin-right: 2px;
 }
 
-.flex-container .nature {
+.flex-container .will {
     flex: 0 0 9em;
 }
-.flex-container .will {
+.flex-container .nature {
     flex: 0 0 9em;
 }
 .flex-container .nature span {

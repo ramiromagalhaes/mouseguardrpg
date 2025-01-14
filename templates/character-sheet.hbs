@@ -1,7 +1,17 @@
 <div class="sheet">
     <header>
-        <img height="100" width="100" />
-        {{formField fields.name value=name}}
+        <div class="flex-container">
+            <img
+                src="{{img}}"
+                alt="{{name}}"
+                data-edit="img"
+                data-action="editImage"
+                title="{{name}}"
+                height="100"
+                width="100"
+            />
+            {{formField fields.name value=name}}
+        </div>
     </header>
     <section>
         <div class="flex-container">
@@ -25,35 +35,6 @@
     </section>
     <section>
         <div class="flex-container">
-            <!--
-            {{formField fields.instinct value=instinct}}
-            {{formField fields.belief value=belief}}
-            {{formField fields.goal value=goal}}
-            {{editor
-                fields.instinct
-                target=instinct
-                editable=true
-                button=false
-                engine="prosemirror"
-                collaborate=false
-            }}
-            {{editor
-                fields.belief
-                target=belief
-                editable=true
-                button=false
-                engine="prosemirror"
-                collaborate=false
-            }}
-            {{editor
-                fields.goal
-                target=goal
-                editable=true
-                button=false
-                engine="prosemirror"
-                collaborate=false
-            }}
-            -->
             <div>
                 <label>Instinct</label>
                 <textarea name="system.instinct">{{~instinct}}</textarea>
@@ -75,9 +56,9 @@
             <div class="nature">
                 <label for="nature_current">Nature</label>
                 <span><input
-                        name="nature_current"
+                        name="system.nature.current"
                         type="number"
-                        value=""
+                        value="{{nature.current}}"
                         min="0"
                         max="7"
                         id="nature_current"
@@ -85,9 +66,9 @@
                 <span class="slash"> / </span>
                 <span>
                     <input
-                        name="nature_max"
+                        name="system.nature.max"
                         type="number"
-                        value=""
+                        value="{{nature.max}}"
                         min="0"
                         max="7"
                         id="nature_max"
@@ -95,63 +76,29 @@
             </div>
         </div>
         <div class="flex-container abilities">
-            <div>
-                <label for="resources">Resources</label>
-                <span><input
-                        name="resources"
-                        type="number"
-                        value=""
-                        min="0"
-                        max="9"
-                        id="resources"
-                    /></span>
-            </div>
-            <div>
-                <label for="circles">Circles</label>
-                <span><input
-                        name="circles"
-                        type="number"
-                        value=""
-                        min="0"
-                        max="9"
-                        id="circles"
-                    /></span>
-            </div>
+            {{formField fields.resources value=resources}}
+            {{formField fields.circles value=circles}}
         </div>
     </section>
     <section>
         <div class="flex-container">
-            <div>
-                <label for="fate">Fate</label>
-                <span><input
-                        name="fate"
-                        type="number"
-                        value=""
-                        min="0"
-                        id="fate"
-                    />
-                </span>
-            </div>
-            <div>
-                <label for="persona">Persona</label>
-                <span><input
-                        name="persona"
-                        type="number"
-                        value=""
-                        min="0"
-                        id="persona"
-                    /></span>
-            </div>
-            <div>
-                <label for="checks">Checks</label>
-                <span><input
-                        name="checks"
-                        type="number"
-                        value=""
-                        min="0"
-                        id="checks"
-                    /></span>
-            </div>
+            {{formField fields.fate value=fate}}
+            {{formField fields.persona value=persona}}
+            {{formField fields.checks value=checks}}
         </div>
+    </section>
+    <section>
+        <label>Bio</label>
+        {{formInput fields.bio value=bio.text enriched=bio.enriched height=300}}
+        <!--
+        {{editor
+            bio.enriched
+            target=bio.text
+            button=true
+            engine="prosemirror"
+            editable=true
+            collaborate=false
+        }}
+        -->
     </section>
 </div>

@@ -27,6 +27,9 @@ export class CharacterSheet extends api.HandlebarsApplicationMixin(
             //handler: CharacterSheet.formHandler,
             submitOnChange: true,
             closeOnSubmit: false
+        },
+        actions: {
+            editImage: CharacterSheet.#onEditImage
         }
     };
 
@@ -43,19 +46,8 @@ export class CharacterSheet extends api.HandlebarsApplicationMixin(
      * @override
      */
     async _prepareContext(options) {
-        /*TODO how do I set a proper validation message to name?
-        const bio = {
-            field: this.document.system.schema.fields.bio,
-            value: this.document.system.bio,
-            enriched: await TextEditor.enrichHTML(this.document.system.bio, {
-                rollData: this.document.getRollData(),
-                relativeTo: this.document
-            })
-        };
-        {{formGroup bio.field value=bio.value enriched=bio.enriched height=300}}
-        */
-
         const context = {
+            img: this.document.img,
             name: this.document.name,
             home: this.document.system.home,
             fur: this.document.system.fur,
@@ -72,7 +64,24 @@ export class CharacterSheet extends api.HandlebarsApplicationMixin(
             goal: this.document.system.goal,
             health: this.document.system.health,
             will: this.document.system.will,
+            nature: this.document.system.nature,
+            resources: this.document.system.resources,
+            circles: this.document.system.circles,
+            fate: this.document.system.fate,
+            persona: this.document.system.persona,
+            checks: this.document.system.checks,
+            bio: {
+                text: this.document.system.bio,
+                enriched: await TextEditor.enrichHTML(
+                    this.document.system.bio,
+                    {
+                        rollData: this.document.getRollData(),
+                        relativeTo: this.document
+                    }
+                )
+            },
             fields: {
+                img: this.document.schema.fields.img,
                 name: this.document.schema.fields.name,
                 home: this.document.system.schema.fields.home,
                 fur: this.document.system.schema.fields.fur,
@@ -89,10 +98,35 @@ export class CharacterSheet extends api.HandlebarsApplicationMixin(
                 belief: this.document.system.schema.fields.belief,
                 goal: this.document.system.schema.fields.goal,
                 health: this.document.system.schema.fields.health,
-                will: this.document.system.schema.fields.will
+                will: this.document.system.schema.fields.will,
+                nature: this.document.system.schema.fields.nature,
+                resources: this.document.system.schema.fields.resources,
+                circles: this.document.system.schema.fields.circles,
+                fate: this.document.system.schema.fields.fate,
+                persona: this.document.system.schema.fields.persona,
+                checks: this.document.system.schema.fields.checks,
+                bio: this.document.system.schema.fields.bio
             }
         };
         return context;
+    }
+
+    /**
+     * Edit the Actor profile image.
+     * TODO: Remove this in V13
+     */
+    static async #onEditImage(event) {
+        const current = this.document.img;
+        const fp = new FilePicker({
+            current,
+            type: "image",
+            callback: (path) => {
+                event.target.src = path;
+                this.document.img = path;
+                this.submit();
+            }
+        });
+        await fp.browse();
     }
 
     /*

@@ -45,16 +45,16 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
     };
 
     static defineSchema() {
-        const fields = {
-            //name: new StringField(this.searcheable_string),
-            //TODO create bio & use prosemirror
+        //TODO how do I set a proper validation message to name?
 
-            fur: new StringField({ ...this.searcheable_string, label: "Fur" }),
+        const fields = {
             home: new StringField({
                 ...this.searcheable_string,
                 label: "Home"
             }),
+            fur: new StringField({ ...this.searcheable_string, label: "Fur" }),
             age: new NumberField({ ...this.positive_number, label: "Age" }),
+
             rank: new StringField({
                 ...this.searcheable_string,
                 label: "Rank"
@@ -71,6 +71,7 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
                 ...this.searcheable_string,
                 label: "Master Artisan"
             }),
+
             parents: new StringField({
                 ...this.searcheable_string,
                 label: "Parents"
@@ -84,14 +85,11 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
                 label: "Enemy"
             }),
 
-            //TODO use prosemirror?
             instinct: new StringField({
                 ...this.plain_string,
                 label: "Instinct"
             }),
-            //TODO use prosemirror?
             belief: new StringField({ ...this.plain_string, label: "Belief" }),
-            //TODO use prosemirror?
             goal: new StringField({ ...this.plain_string, label: "Goal" }),
 
             nature: new SchemaField({
@@ -121,13 +119,13 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
             checks: new NumberField({
                 ...this.positive_number,
                 label: "Checks"
-            })
+            }),
 
-            //picture
+            bio: new HTMLField({ label: "Bio" })
+
             //skills
             //characteristics
             //wises
-            //description/bio
         };
 
         return fields;
