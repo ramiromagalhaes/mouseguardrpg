@@ -1,5 +1,11 @@
-const { StringField, NumberField, SchemaField, HTMLField, FilePathField } =
-    foundry.data.fields;
+const {
+    StringField,
+    NumberField,
+    BooleanField,
+    SchemaField,
+    HTMLField,
+    ArrayField
+} = foundry.data.fields;
 
 export class AnimalDataModel extends foundry.abstract.TypeDataModel {
     static defineSchema() {
@@ -121,11 +127,35 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
                 label: "Checks"
             }),
 
-            bio: new HTMLField({ label: "Bio" })
+            bio: new HTMLField({ label: "Bio" }),
 
-            //skills
-            //characteristics
-            //wises
+            skills: new ArrayField(
+                new SchemaField({
+                    skill: new StringField(this.searcheable_string),
+                    rating: new NumberField(this.positive_number),
+                    passes: new NumberField(this.positive_number),
+                    fails: new NumberField(this.positive_number)
+                })
+            ),
+
+            traits: new ArrayField(
+                new SchemaField({
+                    trait: new StringField(this.searcheable_string),
+                    level: new NumberField(this.positive_number),
+                    for: new NumberField(this.positive_number),
+                    against: new NumberField(this.positive_number)
+                })
+            ),
+
+            wises: new ArrayField(
+                new SchemaField({
+                    wise: new StringField(this.searcheable_string),
+                    pass: new BooleanField(),
+                    fail: new BooleanField(),
+                    fate: new BooleanField(),
+                    persona: new BooleanField()
+                })
+            )
         };
 
         return fields;
@@ -136,6 +166,57 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
 
         // Make sure nature cannot exceed its maximum.
         this.nature.current = Math.min(this.nature.current, this.nature.max);
+
+        this.acquireSkill();
+        this.acquireTraits();
+        this.acquireWises();
+    }
+
+    acquireSkill() {
+        this.skills.push({
+            skill: "Thing",
+            rating: 3,
+            passes: 1,
+            fails: 2
+        });
+        this.skills.push({
+            skill: "Something",
+            rating: 5,
+            passes: 4,
+            fails: 2
+        });
+    }
+
+    acquireTraits() {
+        this.traits.push({
+            trait: "Thing",
+            level: 1,
+            for: 1,
+            against: 1
+        });
+        this.traits.push({
+            trait: "Something",
+            level: 2,
+            for: 0,
+            against: 0
+        });
+    }
+
+    acquireWises() {
+        this.wises.push({
+            wise: "Wise 1",
+            pass: 0,
+            fail: 0,
+            fate: 1,
+            persona: 1
+        });
+        this.wises.push({
+            wise: "Wise 2",
+            pass: 1,
+            fail: 1,
+            fate: 0,
+            persona: 0
+        });
     }
 
     spendNature(toSpend) {

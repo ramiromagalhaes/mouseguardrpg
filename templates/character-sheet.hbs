@@ -101,4 +101,103 @@
         }}
         -->
     </section>
+    <section><!-- should support drag and drop -->
+        <table>
+            <tr>
+                <th style="text-align: left">Skills</th>
+                <th>Rating</th>
+                <th>Passes/Fails</th>
+                <th style="text-align: right"><i class="fas fa-plus"></i></th>
+            </tr>
+            {{#each skills as |s|}}
+                <tr>
+                    <td>{{s.skill}}</td>
+                    <td>
+                        <input
+                            type="number"
+                            max="6"
+                            min="0"
+                            step="1"
+                            name="system.skill.rating"
+                            value="{{s.rating}}"
+                        />
+                    </td>
+                    <td>P: {{s.passes}}; F: {{s.fails}}</td>
+                    <td style="text-align: right"><span><i
+                                class="fas fa-trash"
+                            ></i></span></td>
+                </tr>
+            {{/each}}
+        </table>
+    </section>
+    <section>
+        <table>
+            <tr>
+                <th style="text-align: left">Traits</th>
+                <th>Level</th>
+                <th>For/Against</th>
+                <th style="text-align: right"><i class="fas fa-plus"></i></th>
+            </tr>
+            {{#each traits as |t|}}
+                <tr>
+                    <td>{{t.trait}}</td>
+                    <td>
+                        <input
+                            type="number"
+                            max="6"
+                            min="0"
+                            step="1"
+                            name="system.traits.level"
+                            value="{{t.level}}"
+                        />
+                    </td>
+                    <td>F: {{t.for}}; A: {{t.against}}</td>
+                    <td style="text-align: right"><span><i
+                                class="fas fa-trash"
+                            ></i></span></td>
+                </tr>
+            {{/each}}
+        </table>
+    </section>
+    <section>
+        <!-- Maybe take a look: https://discord.com/channels/170995199584108546/670336275496042502/1329202960747466874 -->
+        <table>
+            <tr>
+                <th style="text-align: left">Wises</th>
+                <th>Pass</th>
+                <th>Fail</th>
+                <th>Fate</th>
+                <th>Persona</th>
+                <th style="text-align: right"><i class="fas fa-plus"></i></th>
+            </tr>
+            {{#each wises as |w|}}
+                <tr>
+                    <td>{{w.wise}}</td>
+                    <td><input
+                            type="checkbox"
+                            value="pass"
+                            {{checked w.pass}}
+                        /></td>
+                    <td><input
+                            type="checkbox"
+                            value="fail"
+                            {{checked w.fail}}
+                        /></td>
+                    <td><input
+                            type="checkbox"
+                            value="fate"
+                            {{checked w.fate}}
+                        /></td>
+                    <td><input
+                            type="checkbox"
+                            value="persona"
+                            {{checked w.persona}}
+                        /></td>
+                    <td style="text-align: right"><span><i
+                                class="fas fa-trash"
+                            ></i></span></td>
+                </tr>
+            {{/each}}
+        </table>
+    </section>
 </div>

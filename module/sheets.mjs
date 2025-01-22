@@ -80,6 +80,11 @@ export class CharacterSheet extends api.HandlebarsApplicationMixin(
                     }
                 )
             },
+
+            skills: this.document.system.skills,
+            traits: this.document.system.traits,
+            wises: this.document.system.wises,
+
             fields: {
                 img: this.document.schema.fields.img,
                 name: this.document.schema.fields.name,
@@ -105,7 +110,11 @@ export class CharacterSheet extends api.HandlebarsApplicationMixin(
                 fate: this.document.system.schema.fields.fate,
                 persona: this.document.system.schema.fields.persona,
                 checks: this.document.system.schema.fields.checks,
-                bio: this.document.system.schema.fields.bio
+                bio: this.document.system.schema.fields.bio,
+
+                skills: this.document.system.schema.fields.skills,
+                traits: this.document.system.schema.fields.traits,
+                wises: this.document.system.schema.fields.wises
             }
         };
         return context;
@@ -113,7 +122,7 @@ export class CharacterSheet extends api.HandlebarsApplicationMixin(
 
     /**
      * Edit the Actor profile image.
-     * TODO: Remove this in V13
+     * TODO: Remove this in V13?
      */
     static async #onEditImage(event) {
         const current = this.document.img;
