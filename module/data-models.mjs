@@ -53,7 +53,7 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
     static defineSchema() {
         //TODO how do I set a proper validation message to name?
 
-        const fields = {
+        const schema = {
             home: new StringField({
                 ...this.searcheable_string,
                 label: "Home"
@@ -158,7 +158,7 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
             )
         };
 
-        return fields;
+        return schema;
     }
 
     prepareDerivedData() {
@@ -228,4 +228,96 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
             //TODO should I reduce remaining nature from the new max? Gotta check the rules.
         }
     }
+}
+
+export class SkillDataModel extends foundry.abstract.TypeDataModel {
+    static max_rating = 6;
+
+    static defineSchema() {
+        const schema = {
+            type: new StringField({
+                required: true,
+                blank: false,
+                initial: "skill"
+            }),
+            description: new StringField({
+                blank: true,
+                trim: true,
+                textSearch: true,
+                label: "Description"
+            }),
+            rating: new NumberField({
+                required: true,
+                integer: true,
+                min: 0,
+                initial: 0,
+                max: this.max_rating
+            }),
+            passes: new NumberField({
+                required: true,
+                integer: true,
+                min: 0,
+                initial: 0,
+                max: this.max_rating
+            }),
+            fails: new NumberField({
+                required: true,
+                integer: true,
+                min: 0,
+                initial: 0,
+                max: this.max_rating
+            })
+        };
+
+        return schema;
+    }
+
+    prepareDerivedData() {
+        super.prepareDerivedData();
+    }
+
+    /**
+     * @see #addTest
+     */
+    addPass() {
+        return this.#addTest(true);
+    }
+
+    /**
+     * @see #addTest
+     */
+    addFail() {
+        return this.#addTest(false);
+    }
+
+    /**
+     * Return true if the character increased his rating.
+     * @param {boolean} pass true to add a pass, false to add a fail
+     */
+    #addTest(pass) {
+        const fail_threshold = this.rating - 1;
+
+        if (pass) {
+            if (this.passes < this.rating) this.passes++;
+        } else {
+            if (this.fails < fail_threshold) this.fails++;
+        }
+
+        if (
+            this.passes >= this.rating &&
+            this.fails >= fail_threshold &&
+            this.rating < this.max_rating
+        ) {
+            this.passes = 0;
+            this.fails = 0;
+            this.rating++;
+            return true;
+        }
+
+        return false;
+    }
+}
+
+export class TraitDataModel extends foundry.abstract.TypeDataModel {
+    static defineSchema() {}
 }

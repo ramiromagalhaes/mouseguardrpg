@@ -120,8 +120,24 @@ export class CharacterSheet extends api.HandlebarsApplicationMixin(
         return context;
     }
 
+    _onRender(context, options) {
+        super._onRender(context, options);
+
+        //Adds the handler that allows us to store skill levels created in the table
+        const skills = this.element.querySelectorAll("input.skill-rating"); // whatever selector works for you
+        for (const s of skills) {
+            //should I add the means to find the item?
+            s.addEventListener("change", (e) => {
+                console.log("Find the id and new skill and show it.");
+                console.log(e);
+            });
+        }
+    }
+
     /**
      * Edit the Actor profile image.
+     * This is a simplified version of the script I've seen people playing
+     * around with in the web.
      * TODO: Remove this in V13?
      */
     static async #onEditImage(event) {
@@ -155,4 +171,32 @@ export class CharacterSheet extends api.HandlebarsApplicationMixin(
         console.log(JSON.stringify(this.actor));
     }
      */
+}
+
+export class SkillSheet extends api.HandlebarsApplicationMixin(
+    sheets.ItemSheetV2
+) {
+    static DEFAULT_OPTIONS = {
+        actions: {},
+        form: {
+            submitOnChange: true,
+            closeOnSubmit: false
+        }
+    };
+
+    static PARTS = {
+        form: {
+            template: "systems/mouseguardrpg/templates/skill-sheet.hbs",
+            scrollable: [""]
+        }
+    };
+
+    async _prepareContext(options) {
+        return {
+            name: this.document.name,
+            fields: {
+                name: this.document.schema.fields.name
+            }
+        };
+    }
 }

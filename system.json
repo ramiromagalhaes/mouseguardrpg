@@ -23,6 +23,9 @@
             "mouse": {},
             "animal": {},
             "weasel": {}
+        },
+        "Item": {
+            "skill": {}
         }
     }
 }

@@ -2,10 +2,11 @@ import {
     AnimalDataModel,
     MouseDataModel,
     WeaselDataModel,
-    CharacterDataModel
+    CharacterDataModel,
+    SkillDataModel
 } from "./module/data-models.mjs";
-import { MouseGuardActor } from "./module/documents.mjs";
-import { CharacterSheet } from "./module/sheets.mjs";
+import { MouseGuardActor, MouseGuardItem } from "./module/documents.mjs";
+import { CharacterSheet, SkillSheet } from "./module/sheets.mjs";
 
 Hooks.once("init", () => {
     //Data Models
@@ -14,8 +15,12 @@ Hooks.once("init", () => {
     CONFIG.Actor.dataModels.weasel = WeaselDataModel;
     CONFIG.Actor.dataModels.character = CharacterDataModel;
 
+    CONFIG.Item.dataModels.skill = SkillDataModel;
+
     //Documents
     CONFIG.Actor.documentClass = MouseGuardActor;
+
+    CONFIG.Item.documentClass = MouseGuardItem;
 
     //Register sheet application classes
     Actors.unregisterSheet("core", ActorSheet);
@@ -23,5 +28,12 @@ Hooks.once("init", () => {
         types: ["character"],
         makeDefault: true,
         label: "Character"
+    });
+
+    Items.unregisterSheet("core", ItemSheet);
+    Items.registerSheet("mouseguardrpg", SkillSheet, {
+        types: ["skill"],
+        makeDefault: true,
+        label: "Skill"
     });
 });
