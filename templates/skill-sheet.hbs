@@ -1,5 +1,18 @@
 <div class="sheet">
     <header>
+        {{formField fields.name value=name}}
+    </header>
+    <section>
+        <label>Description</label>
+        {{formInput
+            fields.description
+            value=description.text
+            enriched=description.enriched
+            height=300
+        }}
+    </section>
+    <footer>
+        <!-- TODO Image should be optional. -->
         <div class="flex-container">
             <img
                 src="{{img}}"
@@ -10,10 +23,6 @@
                 height="100"
                 width="100"
             />
-            {{formField fields.name value=name}}
         </div>
-    </header>
-    <section>
-        <!-- TODO skill sheet -->
-    </section>
+    </footer>
 </div>

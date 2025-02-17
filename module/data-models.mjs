@@ -220,12 +220,14 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
     }
 
     spendNature(toSpend) {
-        if (this.nature.current - toSpend > 0) {
-            this.nature.current -= toSpend;
+        const updatedCurrentNature = this.nature.current - toSpend;
+        if (updatedCurrentNature > 0) {
+            this.nature.current = updatedCurrentNature;
         } else {
+            //TODO must report if MAX nature reaches 0.
             this.nature.max -= 1;
             this.nature.current = this.nature.max;
-            //TODO should I reduce remaining nature from the new max? Gotta check the rules.
+            this.spendNature(-updatedCurrentNature);
         }
     }
 }
@@ -235,16 +237,11 @@ export class SkillDataModel extends foundry.abstract.TypeDataModel {
 
     static defineSchema() {
         const schema = {
-            type: new StringField({
-                required: true,
-                blank: false,
-                initial: "skill"
-            }),
-            description: new StringField({
+            description: new HTMLField({
+                label: "Description",
                 blank: true,
                 trim: true,
-                textSearch: true,
-                label: "Description"
+                textSearch: true
             }),
             rating: new NumberField({
                 required: true,
@@ -277,6 +274,8 @@ export class SkillDataModel extends foundry.abstract.TypeDataModel {
     }
 
     /**
+     * The character passed a test, therefore its skill progress/level must be
+     * updated accordingly.
      * @see #addTest
      */
     addPass() {
@@ -284,6 +283,8 @@ export class SkillDataModel extends foundry.abstract.TypeDataModel {
     }
 
     /**
+     * The character failed a test, therefore its skill progress/level must be
+     * updated accordingly.
      * @see #addTest
      */
     addFail() {
@@ -319,5 +320,72 @@ export class SkillDataModel extends foundry.abstract.TypeDataModel {
 }
 
 export class TraitDataModel extends foundry.abstract.TypeDataModel {
-    static defineSchema() {}
+    static max_level = 3;
+
+    static defineSchema() {
+        const schema = {
+            description: new StringField({
+                blank: true,
+                trim: true,
+                textSearch: true,
+                label: "Description"
+            }),
+            level: new NumberField({
+                required: true,
+                integer: true,
+                min: 0,
+                initial: 0,
+                max: this.max_level
+            }),
+            for: new NumberField({
+                //for meaning "in favor of this character"
+                required: true,
+                integer: true,
+                min: 0,
+                initial: 0,
+                max: this.max_level
+            }),
+            against: new NumberField({
+                required: true,
+                integer: true,
+                min: 0,
+                initial: 0,
+                max: this.max_level
+            })
+        };
+
+        return schema;
+    }
+}
+
+export class WiseDataModel extends foundry.abstract.TypeDataModel {
+    static defineSchema() {
+        const schema = {
+            pass: new BooleanField({
+                required: true,
+                initial: false
+            }),
+            fail: new BooleanField({
+                required: true,
+                initial: false
+            }),
+            fate: new BooleanField({
+                required: true,
+                initial: false
+            }),
+            persona: new BooleanField({
+                required: true,
+                initial: false
+            })
+        };
+
+        return schema;
+    }
+
+    clear() {
+        this.pass = false;
+        this.fail = false;
+        this.fate = false;
+        this.persona = false;
+    }
 }

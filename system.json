@@ -25,7 +25,7 @@
             "weasel": {}
         },
         "Item": {
-            "skill": {}
+            "skill": { "htmlFields": ["description"] }
         }
     }
 }

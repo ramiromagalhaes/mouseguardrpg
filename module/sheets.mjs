@@ -181,6 +181,9 @@ export class SkillSheet extends api.HandlebarsApplicationMixin(
         form: {
             submitOnChange: true,
             closeOnSubmit: false
+        },
+        actions: {
+            editImage: SkillSheet.#onEditImage
         }
     };
 
@@ -192,11 +195,46 @@ export class SkillSheet extends api.HandlebarsApplicationMixin(
     };
 
     async _prepareContext(options) {
-        return {
+        const context = {
+            img: this.document.img,
             name: this.document.name,
+            description: {
+                text: this.document.system.description,
+                enriched: await TextEditor.enrichHTML(
+                    this.document.system.description,
+                    {
+                        rollData: this.document.getRollData(),
+                        relativeTo: this.document
+                    }
+                )
+            },
+
             fields: {
-                name: this.document.schema.fields.name
+                img: this.document.schema.fields.img,
+                name: this.document.schema.fields.name,
+                description: this.document.system.schema.fields.description
             }
         };
+        return context;
+    }
+
+    /**
+     * Edit the Actor profile image.
+     * This is a simplified version of the script I've seen people playing
+     * around with in the web.
+     * TODO: Remove this in V13?
+     */
+    static async #onEditImage(event) {
+        const current = this.document.img;
+        const fp = new FilePicker({
+            current,
+            type: "image",
+            callback: (path) => {
+                event.target.src = path;
+                this.document.img = path;
+                this.submit();
+            }
+        });
+        await fp.browse();
     }
 }
